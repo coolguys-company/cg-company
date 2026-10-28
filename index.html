@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CG Company автоматизує рутину</title>
+<meta name="description" content="CG Company робить Telegram-ботів, парсери й звіти, що збираються самі, щоб рутину робив код, а не люди.">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="uk" href="./">
+<link rel="alternate" hreflang="en" href="en/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Onest:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip" href="#main">Перейти до змісту</a>
+
+<header class="nav">
+  <div class="container nav__row">
+    <a class="nav__home" href="./" aria-label="CG Company, на головну">
+      <svg class="mark mark--nav logo" viewBox="-152 -152 269 304" aria-hidden="true">
+        <path class="mark__c" d="M107.25,-89.99 A140,140 0 1,0 107.25,89.99" fill="none" stroke="currentColor" stroke-width="24"/>
+        <g class="mark__turn"><path d="M-79.65,-19.5 A82,82 0 1,1 -81.82,5.5 H-4.5 V26.5 H-52.71 A59,59 0 1,0 -55.68,-19.5 Z" fill="currentColor"/></g>
+      </svg>
+      <span>CG Company</span>
+    </a>
+    <div class="nav__end">
+      <a class="nav__lang" href="en/" hreflang="en" lang="en">English</a>
+      <a class="btn btn--quiet" href="#contact">Зв'язатися</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <div class="container hero__grid">
+      <svg class="mark mark--hero logo" viewBox="-152 -152 269 304" aria-hidden="true">
+        <path class="mark__c" pathLength="1" d="M107.25,-89.99 A140,140 0 1,0 107.25,89.99" fill="none" stroke="currentColor" stroke-width="24"/>
+        <g class="mark__turn"><g class="mark__g"><path d="M-79.65,-19.5 A82,82 0 1,1 -81.82,5.5 H-4.5 V26.5 H-52.71 A59,59 0 1,0 -55.68,-19.5 Z" fill="currentColor"/></g></g>
+      </svg>
+      <div class="hero__text">
+        <h1>Рутину<br> робить код</h1>
+        <p class="hero__lede">Telegram-боти, парсинг і звіти, що збираються самі.</p>
+        <a class="btn" href="#contact">Обговорити задачу</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo" aria-labelledby="demo-h" data-demo>
+    <div class="container demo__grid">
+      <div class="section-head">
+        <h2 id="demo-h">З розкиданих джерел в одну структуру</h2>
+        <p>Три приклади: бот збирає дані з кількох місць і розкладає їх по поличках.</p>
+      </div>
+
+      <div class="scenes">
+        <div class="scenes__tabs" role="tablist" aria-label="Приклади автоматизацій">
+          <button type="button" role="tab" id="tab-digest" aria-controls="scene-digest" aria-selected="true">Дайджест у Telegram<span class="tab__bar" aria-hidden="true"></span></button>
+          <button type="button" role="tab" id="tab-leads" aria-controls="scene-leads" aria-selected="false" tabindex="-1">Заявки в одну CRM<span class="tab__bar" aria-hidden="true"></span></button>
+          <button type="button" role="tab" id="tab-prices" aria-controls="scene-prices" aria-selected="false" tabindex="-1">Ціни конкурентів<span class="tab__bar" aria-hidden="true"></span></button>
+        </div>
+        <div class="flow flow--tree" id="scene-digest" role="tabpanel" aria-labelledby="tab-digest" data-kind="tree">
+          <ul class="chaos" aria-hidden="true">
+            <li class="chip" data-id="s1" data-r="-5" style="--fx: 0; --fy: 0.02; --mx: 0; --my: 0.0"><span class="chip__body"><span class="chip__src">Google Sheets</span> Замовлення 214</span></li>
+            <li class="chip" data-id="m1" data-r="4" style="--fx: 0.5; --fy: 0.1; --mx: 1; --my: 0.111"><span class="chip__body"><span class="chip__src">Пошта</span> Рахунок за жовтень</span></li>
+            <li class="chip" data-id="r1" data-r="-3" style="--fx: 1; --fy: 0; --mx: 0; --my: 0.222"><span class="chip__body"><span class="chip__src">Redmine</span> #87 Не працює вхід</span></li>
+            <li class="chip" data-id="r2" data-r="3" style="--fx: 0.02; --fy: 0.33; --mx: 1; --my: 0.333"><span class="chip__body"><span class="chip__src">Redmine</span> #88 Експорт у CSV</span></li>
+            <li class="chip" data-id="n1" data-r="-6" style="--fx: 0.48; --fy: 0.44; --mx: 0; --my: 0.444"><span class="chip__body"><span class="chip__src">Notion</span> Договір v3</span></li>
+            <li class="chip" data-id="s2" data-r="5" style="--fx: 1; --fy: 0.34; --mx: 1; --my: 0.556"><span class="chip__body"><span class="chip__src">Google Sheets</span> Замовлення 215</span></li>
+            <li class="chip" data-id="m2" data-r="-4" style="--fx: 0; --fy: 0.66; --mx: 0; --my: 0.667"><span class="chip__body"><span class="chip__src">Пошта</span> Питання щодо гарантії</span></li>
+            <li class="chip" data-id="n2" data-r="3" style="--fx: 0.52; --fy: 0.78; --mx: 1; --my: 0.778"><span class="chip__body"><span class="chip__src">Notion</span> План на листопад</span></li>
+            <li class="chip" data-id="r3" data-r="-5" style="--fx: 0.98; --fy: 0.68; --mx: 0; --my: 0.889"><span class="chip__body"><span class="chip__src">Redmine</span> #91 Новий звіт</span></li>
+            <li class="chip" data-id="s3" data-r="4" style="--fx: 0.04; --fy: 0.98; --mx: 1; --my: 1.0"><span class="chip__body"><span class="chip__src">Google Sheets</span> Оплата, рахунок 12</span></li>
+          </ul>
+          <svg class="wires" aria-hidden="true"></svg>
+          <article class="post" aria-label="Приклад дайджесту в Telegram-каналі">
+            <header class="post__head">
+              <span class="post__avatar" aria-hidden="true">Р</span>
+              <span class="post__who"><b>Ранковий дайджест</b> <span class="post__meta">Telegram, 09:00</span></span>
+            </header>
+            <p class="post__title">Дайджест на 28 жовтня</p>
+            <ul class="tree">
+              <li class="tree__branch"><span class="tree__node"><svg class="tree__icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3.5h4.2l1.6 1.6h7.2v7.4h-13z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>Продажі</span>
+                <ul>
+                  <li class="tree__leaf" data-id="s1">Замовлення 214</li>
+                  <li class="tree__leaf" data-id="s2">Замовлення 215</li>
+                  <li class="tree__leaf" data-id="s3">Оплата, рахунок 12</li>
+                </ul>
+              </li>
+              <li class="tree__branch"><span class="tree__node"><svg class="tree__icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3.5h4.2l1.6 1.6h7.2v7.4h-13z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>Листи</span>
+                <ul>
+                  <li class="tree__leaf" data-id="m1">Рахунок за жовтень</li>
+                  <li class="tree__leaf" data-id="m2">Питання щодо гарантії</li>
+                </ul>
+              </li>
+              <li class="tree__branch"><span class="tree__node"><svg class="tree__icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3.5h4.2l1.6 1.6h7.2v7.4h-13z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>Задачі</span>
+                <ul>
+                  <li class="tree__leaf" data-id="r1">#87 Не працює вхід</li>
+                  <li class="tree__leaf" data-id="r2">#88 Експорт у CSV</li>
+                  <li class="tree__leaf" data-id="r3">#91 Новий звіт</li>
+                </ul>
+              </li>
+              <li class="tree__branch"><span class="tree__node"><svg class="tree__icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 3.5h4.2l1.6 1.6h7.2v7.4h-13z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>Документи</span>
+                <ul>
+                  <li class="tree__leaf" data-id="n1">Договір v3</li>
+                  <li class="tree__leaf" data-id="n2">План на листопад</li>
+                </ul>
+              </li>
+            </ul>
+            <p class="post__sent"><svg class="check" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Надіслано в канал: 10 оновлень з 4 джерел</p>
+          </article>
+        </div>
+        <div class="flow flow--board" id="scene-leads" role="tabpanel" aria-labelledby="tab-leads" data-kind="board">
+          <div class="stream" aria-hidden="true"><p class="zone-label">Вхідні з 4 каналів</p><p class="stream__count"><span class="num" data-inbox>0</span> необроблених</p></div>
+          <div class="board">
+            <p class="board__title">CRM, заявки за вівторок</p>
+            <div class="board__col" data-col="new">
+              <p class="board__head">Нові <span class="num" data-count>2</span></p>
+              <ul>
+                <li class="card" data-k="1" data-col="new"><span class="card__src">Instagram</span> <span class="card__txt">@kvitka: є розмір M?</span></li>
+                <li class="card" data-k="4" data-col="new"><span class="card__src">Telegram</span> <span class="card__txt">Ігор: скільки доставка?</span></li>
+              </ul>
+            </div>
+            <div class="board__col" data-col="work">
+              <p class="board__head">В роботі <span class="num" data-count>2</span></p>
+              <ul>
+                <li class="card" data-k="2" data-col="work"><span class="card__src">Форма на сайті</span> <span class="card__txt">Анна: рахунок для ТОВ</span></li>
+                <li class="card" data-k="3" data-col="work"><span class="card__src">Дзвінок</span> <span class="card__txt">Марко: ціна за 2 шт</span></li>
+              </ul>
+            </div>
+            <div class="board__col" data-col="done">
+              <p class="board__head">Готово <span class="num" data-count>2</span></p>
+              <ul>
+                <li class="card" data-k="0" data-col="done"><span class="card__src">Telegram</span> <span class="card__txt">Олена: запис на четвер</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
+                <li class="card" data-k="5" data-col="done"><span class="card__src">Дзвінок</span> <span class="card__txt">Світлана: гарантія</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="flow flow--prices" id="scene-prices" role="tabpanel" aria-labelledby="tab-prices" data-kind="prices">
+          <div class="scan">
+            <p class="zone-label">Чотири сайти, чотири формати</p>
+            <ul class="scan__rows">
+              <li class="scan__row" data-id="a"><span class="scan__shop">shop-a.example</span><code class="scan__raw">&lt;span class="price"&gt;<b class="scan__val">4 299 ₴</b>&lt;/span&gt;</code></li>
+              <li class="scan__row" data-id="b"><span class="scan__shop">shop-b.example</span><code class="scan__raw">"price": <b class="scan__val">4150</b></code></li>
+              <li class="scan__row" data-id="c"><span class="scan__shop">shop-c.example</span><code class="scan__raw">&lt;div data-cost="<b class="scan__val">4480</b>"&gt;</code></li>
+              <li class="scan__row" data-id="m"><span class="scan__shop">Маркетплейс</span><code class="scan__raw">Ціна: <b class="scan__val">4 390 грн</b></code></li>
+            </ul>
+            <span class="scan__beam" aria-hidden="true"></span>
+          </div>
+          <figure class="dots">
+            <figcaption class="dots__title">Кавоварка X1, ціни сьогодні, грн</figcaption>
+            <div class="dots__plot">
+              <span class="dots__mine" style="--v: 0.417" aria-hidden="true"></span>
+              <span class="dots__mine-label" style="--v: 0.417">Ваша ціна, 4 250</span>
+              <div class="dots__row" data-id="a"><span class="dots__name">shop-a</span><span class="dots__track"><span class="dots__dot" style="--v: 0.498"></span><span class="dots__val" style="--v: 0.498">4 299</span></span></div>
+              <div class="dots__row" data-id="b"><span class="dots__name">shop-b</span><span class="dots__track"><span class="dots__dot is-low" style="--v: 0.25"></span><span class="dots__val" style="--v: 0.25">4 150 <em class="dots__low">найнижча</em></span></span></div>
+              <div class="dots__row" data-id="c"><span class="dots__name">shop-c</span><span class="dots__track"><span class="dots__dot" style="--v: 0.8"></span><span class="dots__val" style="--v: 0.8">4 480</span></span></div>
+              <div class="dots__row" data-id="m"><span class="dots__name">маркетплейс</span><span class="dots__track"><span class="dots__dot" style="--v: 0.65"></span><span class="dots__val" style="--v: 0.65">4 390</span></span></div>
+              <div class="dots__axis" aria-hidden="true"><span style="--v: 0">4 000</span><span style="--v: 0.333">4 200</span><span style="--v: 0.667">4 400</span><span style="--v: 1">4 600</span></div>
+            </div>
+            <p class="dots__verdict">shop-b дешевший за вас на 100 грн. Сповіщення вже в Telegram.</p>
+          </figure>
+        </div>
+      </div>
+
+      <div class="demo__foot">
+        <p class="demo__note">Дані в прикладах вигадані.</p>
+        <button class="btn btn--quiet demo__toggle" type="button" data-loop-toggle data-pause="Пауза" data-play="Продовжити" aria-pressed="false">Пауза</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="work" aria-labelledby="work-h">
+    <div class="container work__inner">
+      <div class="section-head">
+        <h2 id="work-h">Яку рутину ми забираємо</h2>
+      </div>
+      <dl class="work__list">
+        <div class="work__row"><dt>Боти, що приймають заявки</dt><dd>Telegram-бот відповідає клієнтам, записує заявку й кличе людину, коли треба.</dd></div>
+        <div class="work__row"><dt>Парсери, що збирають дані</dt><dd>Ціни, залишки й оголошення з сайтів і таблиць зводимо в одне місце.</dd></div>
+        <div class="work__row"><dt>Звіти, що складаються самі</dt><dd>Цифри приходять у чат щоранку чи щопонеділка, без ручного копіювання.</dd></div>
+        <div class="work__row"><dt>Інструменти під вашу задачу</dt><dd>Коли готового рішення немає, пишемо своє.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="contact band-light" id="contact" aria-labelledby="contact-h">
+    <div class="container contact__grid">
+      <div class="section-head">
+        <h2 id="contact-h">Розкажіть, яку рутину прибрати</h2>
+        <p>Відповідають ті, хто пише код, без менеджерів.</p>
+      </div>
+      <form class="brief" data-endpoint="" novalidate>
+        <div class="field">
+          <label for="task">Що забирає час</label>
+          <textarea id="task" name="task" rows="4" required placeholder="Щодня переносимо заявки з Telegram у таблицю"></textarea>
+        </div>
+        <div class="field">
+          <label for="reach">Як з вами зв'язатися</label>
+          <input id="reach" name="reach" type="text" autocomplete="on" required placeholder="@telegram, пошта або телефон">
+        </div>
+        <div class="brief__row">
+          <button class="btn" type="submit">Надіслати задачу</button>
+        </div>
+        <p class="brief__help" id="brief-help" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="container foot__row">
+    <span class="foot__name">
+      <svg class="mark mark--nav logo" viewBox="-152 -152 269 304" aria-hidden="true">
+        <path d="M107.25,-89.99 A140,140 0 1,0 107.25,89.99" fill="none" stroke="currentColor" stroke-width="24"/>
+        <path d="M-79.65,-19.5 A82,82 0 1,1 -81.82,5.5 H-4.5 V26.5 H-52.71 A59,59 0 1,0 -55.68,-19.5 Z" fill="currentColor"/>
+      </svg>
+      CG Company
+    </span>
+    <ul class="foot__contacts">
+      <li><span class="fill" data-fill="email">hello@cg.example</span></li>
+      <li><span class="fill" data-fill="telegram">@cg_placeholder</span></li>
+      <li><a class="nav__lang" href="en/" hreflang="en" lang="en">English</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script defer src="app.js" data-msg-task="Опишіть задачу хоча б одним реченням." data-msg-reach="Залиште контакт, щоб ми могли відповісти." data-msg-offline="Нічого не надіслано: форма ще не підключена." data-msg-fail="Не вдалося надіслати. Спробуйте за хвилину." data-msg-ok="Отримали. Відповімо на контакт, який ви залишили."></script>
+</body>
+</html>
