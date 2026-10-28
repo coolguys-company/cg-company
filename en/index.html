@@ -114,27 +114,28 @@
         </div>
         <div class="flow flow--board" id="scene-leads" role="tabpanel" aria-labelledby="tab-leads" data-kind="board">
           <div class="stream" aria-hidden="true"><p class="zone-label">Inbox from 4 channels</p><p class="stream__count"><span class="num" data-inbox>0</span> unhandled</p></div>
+          <div class="sources" aria-hidden="true"><span class="source" data-src="tg"><span class="source__name">Telegram</span> <span class="num" data-src-count>0</span></span><span class="source" data-src="ig"><span class="source__name">Instagram</span> <span class="num" data-src-count>0</span></span><span class="source" data-src="form"><span class="source__name">Website</span> <span class="num" data-src-count>0</span></span><span class="source" data-src="call"><span class="source__name">Calls</span> <span class="num" data-src-count>0</span></span></div>
           <div class="board">
             <p class="board__title">CRM, requests for Tuesday</p>
             <div class="board__col" data-col="new">
               <p class="board__head">New <span class="num" data-count>2</span></p>
               <ul>
-                <li class="card" data-k="1" data-col="new"><span class="card__src">Instagram</span> <span class="card__txt">@kvitka: size M in stock?</span></li>
-                <li class="card" data-k="4" data-col="new"><span class="card__src">Telegram</span> <span class="card__txt">Ihor: delivery cost?</span></li>
+                <li class="card" data-k="1" data-col="new" data-src="ig"><span class="card__src">Instagram</span> <span class="card__txt">@kvitka: size M in stock?</span></li>
+                <li class="card" data-k="4" data-col="new" data-src="tg"><span class="card__src">Telegram</span> <span class="card__txt">Ihor: delivery cost?</span></li>
               </ul>
             </div>
             <div class="board__col" data-col="work">
               <p class="board__head">In progress <span class="num" data-count>2</span></p>
               <ul>
-                <li class="card" data-k="2" data-col="work"><span class="card__src">Website form</span> <span class="card__txt">Anna: company invoice</span></li>
-                <li class="card" data-k="3" data-col="work"><span class="card__src">Phone call</span> <span class="card__txt">Marko: price for 2 sets</span></li>
+                <li class="card" data-k="2" data-col="work" data-src="form"><span class="card__src">Website form</span> <span class="card__txt">Anna: company invoice</span></li>
+                <li class="card" data-k="3" data-col="work" data-src="call"><span class="card__src">Phone call</span> <span class="card__txt">Marko: price for 2 sets</span></li>
               </ul>
             </div>
             <div class="board__col" data-col="done">
               <p class="board__head">Done <span class="num" data-count>2</span></p>
               <ul>
-                <li class="card" data-k="0" data-col="done"><span class="card__src">Telegram</span> <span class="card__txt">Olena: Thursday booking</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
-                <li class="card" data-k="5" data-col="done"><span class="card__src">Phone call</span> <span class="card__txt">Svitlana: warranty</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
+                <li class="card" data-k="0" data-col="done" data-src="tg"><span class="card__src">Telegram</span> <span class="card__txt">Olena: Thursday booking</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
+                <li class="card" data-k="5" data-col="done" data-src="call"><span class="card__src">Phone call</span> <span class="card__txt">Svitlana: warranty</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></li>
               </ul>
             </div>
           </div>

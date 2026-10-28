@@ -113,6 +113,12 @@ html:not(.js) .stream, .flow.is-static .stream { display: none; }
 .stream { grid-template-rows: auto 1fr auto; }
 .stream__count { align-self: end; display: flex; align-items: baseline; gap: var(--space-xs); font-size: var(--text-sm); color: var(--color-ink-2); }
 .stream__count .num { font-family: var(--font-outlier); font-size: var(--text-section); line-height: 1; color: var(--color-ink); font-variant-numeric: tabular-nums; }
+/* phones only: the four channels a request can come from, each counting what it sent */
+.sources { display: none; }
+.source { flex: 1 1 auto; min-width: 0; display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-2xs); padding: var(--space-xs) var(--space-2xs); border: 1px solid var(--color-paper-3); border-radius: var(--radius-input); font-size: var(--text-xs); color: var(--color-ink-2); transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out); }
+.source__name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.source .num { font-family: var(--font-outlier); color: var(--color-ink); }
+.source.is-lit { background: var(--color-paper-3); color: var(--color-ink); }
 .board { grid-column: 5 / -1; grid-row: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-md); align-self: start; }
 html:not(.js) .board, .flow.is-static .board { grid-column: 1 / -1; }
 .board__title { grid-column: 1 / -1; font-weight: 500; }
@@ -224,7 +230,7 @@ html:not(.js) .scenes__tabs { display: none; }
   .scenes__tabs { flex-wrap: nowrap; }
   .tab__full { display: none; }
   .tab__short { display: inline; }
-  .flow { min-height: 33rem; row-gap: var(--space-md); align-items: start; align-content: start; }
+  .flow { min-height: 35rem; row-gap: var(--space-md); align-items: start; align-content: start; }
   .flow--tree { --chip-w: 11rem; --chip-h: 3.5rem; }
   .chaos, .post, .stream, .board, .scan, .dots { grid-column: 1 / -1; }
   .chaos, .post { grid-row: 1; }
@@ -238,9 +244,11 @@ html:not(.js) .scenes__tabs { display: none; }
   .tree__branch > ul { padding-left: var(--space-md); }
   .tree__leaf { font-size: var(--text-xs); }
   .tree__leaf::before { left: calc(-1 * var(--space-sm)); width: var(--space-xs); }
-  .stream { grid-row: 1; z-index: 2; border: 0; padding: 0; align-self: start; }
-  .stream .zone-label, .stream__count { display: none; }
-  .board { grid-row: 1; gap: var(--space-xs); }
+  .stream { display: none; }
+  .sources { grid-column: 1 / -1; grid-row: 1; display: flex; gap: var(--space-2xs); }
+  .flow.is-static .sources { display: none; }
+  .board { grid-row: 2; gap: var(--space-xs); }
+  .flow.is-static .board { grid-row: 1; }
   .board__col { gap: var(--space-xs); padding: var(--space-xs); }
   .board__head { font-size: var(--text-xs); }
   .board ul { min-height: calc(2 * 4.25rem + var(--space-xs)); }

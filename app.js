@@ -134,23 +134,48 @@ if (demo) {
       .set(cards, { opacity: 0 }, 0)
       .set(bg, { clipPath: clip(cN.h) }, 0)
       .set(ghostChecks, { opacity: 0, scale: 0.4 }, 0);
-    ghosts.forEach((g, k) => {
-      tl.fromTo(g, { x: left0, y: top0 + k * step - 28, opacity: 0, rotation: k % 2 ? 1.5 : -1.5 },
-        { y: top0 + k * step, opacity: 1, duration: 0.4, ease: 'back.out(1.6)' }, 0.1 + k * 0.2)
-        .call(() => { tally.inbox += 1; show(); }, null, 0.3 + k * 0.2);
-    });
-    const t1 = 0.1 + cards.length * 0.2 + 0.35;
-    ghosts.forEach((g, k) => {
-      const at = t1 + k * 0.16, h = fit(k + 1);
-      tl.to(g, { x: n.x, y: n.y + k * step, rotation: 0, duration: 0.55 }, at)
-        .call(() => { tally.inbox -= 1; show(); }, null, at + 0.1)
-        .call(() => { tally.new += 1; show(); }, null, at + 0.45);
-      if (h > cN.h) {
-        tl.to(bg, { clipPath: clip(h), duration: 0.4, ease: 'power2.out' }, at + 0.15);
-        below.forEach((c) => tl.to(c, { y: h - cN.h, duration: 0.4, ease: 'power2.out' }, at + 0.15));
-      }
-    });
-    const t2 = t1 + cards.length * 0.16 + 0.8;
+    const grow = (k, at) => {
+      const h = fit(k + 1);
+      if (h <= cN.h) return;
+      tl.to(bg, { clipPath: clip(h), duration: 0.4, ease: 'power2.out' }, at);
+      below.forEach((c) => tl.to(c, { y: h - cN.h, duration: 0.4, ease: 'power2.out' }, at));
+    };
+    let t2;
+    if (getComputedStyle(stream).display === 'none') {
+      // phones have no room for a queue: each request pops out of its channel in the strip above
+      // the board, the channel counts it, and it flies into "new", which grows with each
+      const sources = Object.fromEntries([...scene.querySelectorAll('.source')].map((el) => [el.dataset.src, el]));
+      const sent = Object.fromEntries(Object.keys(sources).map((key) => [key, 0]));
+      const showSent = () => Object.entries(sources).forEach(([key, el]) => { el.querySelector('[data-src-count]').textContent = sent[key]; });
+      tl.call(() => { Object.keys(sent).forEach((key) => { sent[key] = 0; }); showSent(); Object.values(sources).forEach((el) => el.classList.remove('is-lit')); }, null, 0);
+      ghosts.forEach((g, k) => {
+        const key = cards[k].dataset.src, src = sources[key], p = rel(src, f);
+        const at = 0.2 + k * 0.42;
+        tl.call(() => { sent[key] += 1; showSent(); src.classList.add('is-lit'); }, null, at)
+          .call(() => src.classList.remove('is-lit'), null, at + 0.5)
+          .fromTo(g, { x: p.x + p.w / 2 - home[k].w / 2, y: p.y, opacity: 0, scale: 0.6 },
+            { opacity: 1, scale: 0.9, duration: 0.25, ease: 'power2.out' }, at)
+          .to(g, { x: n.x, y: n.y + k * step, scale: 1, duration: 0.55 }, at + 0.25)
+          .call(() => { tally.new += 1; show(); }, null, at + 0.75);
+        grow(k, at + 0.35);
+      });
+      t2 = 0.2 + cards.length * 0.42 + 0.8;
+    } else {
+      ghosts.forEach((g, k) => {
+        tl.fromTo(g, { x: left0, y: top0 + k * step - 28, opacity: 0, rotation: k % 2 ? 1.5 : -1.5 },
+          { y: top0 + k * step, opacity: 1, duration: 0.4, ease: 'back.out(1.6)' }, 0.1 + k * 0.2)
+          .call(() => { tally.inbox += 1; show(); }, null, 0.3 + k * 0.2);
+      });
+      const t1 = 0.1 + cards.length * 0.2 + 0.35;
+      ghosts.forEach((g, k) => {
+        const at = t1 + k * 0.16;
+        grow(k, at + 0.15);
+        tl.to(g, { x: n.x, y: n.y + k * step, rotation: 0, duration: 0.55 }, at)
+          .call(() => { tally.inbox -= 1; show(); }, null, at + 0.1)
+          .call(() => { tally.new += 1; show(); }, null, at + 0.45);
+      });
+      t2 = t1 + cards.length * 0.16 + 0.8;
+    }
     tl.to(bg, { clipPath: clip(cN.h), duration: 0.6 }, t2 + 0.25);
     below.forEach((c) => tl.to(c, { y: 0, duration: 0.6 }, t2 + 0.25));
     let j = 0;
