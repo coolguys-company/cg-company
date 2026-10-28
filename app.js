@@ -2,15 +2,13 @@ const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const msg = document.currentScript.dataset;
 
 // Demo: three scenes, each its own picture of "scattered in, ordered out", played in turn on a loop.
-// A thin bar in the active tab counts down to the next scene. Keyboard focus in the demo holds the
-// finished result on screen (it never freezes a move half-way); the button pauses the loop;
-// off-screen it stops. Without GSAP or with reduced motion every scene shows finished and still.
+// A thin bar in the active tab counts down to the next scene. Choosing a tab stops the loop and
+// leaves that scene on screen; keyboard focus holds a finished result; off-screen it stops. Without GSAP or with reduced motion every scene shows finished and still.
 const demo = document.querySelector('[data-demo]');
 if (demo) {
   const tabs = [...demo.querySelectorAll('[role="tab"]')];
   const scenes = tabs.map((t) => document.getElementById(t.getAttribute('aria-controls')));
   const bars = tabs.map((t) => t.querySelector('.tab__bar'));
-  const toggle = demo.querySelector('[data-loop-toggle]');
   const animate = !still && !!window.gsap;
   let extras = []; // tweens and nodes a scene makes outside its timeline
 
@@ -227,15 +225,13 @@ if (demo) {
 
   const PLAY = { tree: playTree, board: playBoard, prices: playPrices };
   const HOLD = { tree: 1.6, board: 2.2, prices: 2.8 }; // seconds each finished result stays before the next scene
-  const st = { seen: false, focus: false, held: false, started: false };
+  const st = { seen: false, focus: false, manual: false, started: false };
   let current = 0, master = null, sceneEnd = 0;
 
   const sync = () => {
-    toggle.textContent = st.held ? toggle.dataset.play : toggle.dataset.pause;
-    toggle.setAttribute('aria-pressed', String(st.held));
     if (!master) return;
     const holding = st.focus && master.time() >= sceneEnd;
-    if (!st.seen || st.held || holding) master.pause(); else master.resume();
+    if (!st.seen || holding) master.pause(); else master.resume();
   };
 
   const run = (i) => {
@@ -252,10 +248,9 @@ if (demo) {
     const kind = scenes[i].dataset.kind;
     const tl = PLAY[kind](scenes[i]);
     sceneEnd = tl.duration();
-    master = gsap.timeline({ onComplete: () => run((i + 1) % scenes.length) });
-    master.add(tl, 0)
-      .to(bars[i], { scaleX: 1, duration: sceneEnd + HOLD[kind], ease: 'none' }, 0)
-      .call(sync, null, sceneEnd);
+    master = gsap.timeline({ onComplete: () => { if (!st.manual) run((i + 1) % scenes.length); } });
+    master.add(tl, 0).call(sync, null, sceneEnd);
+    if (!st.manual) master.to(bars[i], { scaleX: 1, duration: sceneEnd + HOLD[kind], ease: 'none' }, 0);
     sync();
   };
 
@@ -276,17 +271,18 @@ if (demo) {
     gsap.config({ force3D: true });
     gsap.set(demo.querySelectorAll('.chip, .tree__branch, .tree__leaf, .post__sent, .card, .dots__dot, .dots__val, .dots__mine-label, .dots__verdict'), { opacity: 0 });
   }
-  tabs.forEach((t, i) => t.addEventListener('click', () => (animate ? run(i) : select(i))));
+  // a chosen tab means the visitor took over: play that scene once and stop the loop
+  const choose = (i) => { st.manual = true; animate ? run(i) : select(i); };
+  tabs.forEach((t, i) => t.addEventListener('click', () => choose(i)));
   demo.querySelector('[role="tablist"]').addEventListener('keydown', (e) => {
     const step = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
     if (!step) return;
     const i = (current + step + tabs.length) % tabs.length;
-    animate ? run(i) : select(i);
+    choose(i);
     tabs[i].focus();
   });
   if (animate) {
     const stage = demo.querySelector('.scenes');
-    toggle.addEventListener('click', () => { st.held = !st.held; sync(); });
     // keyboard focus holds the finished result; a mouse click on a tab does not
     stage.addEventListener('focusin', (e) => { st.focus = e.target.matches(':focus-visible'); sync(); });
     stage.addEventListener('focusout', () => { st.focus = false; sync(); });

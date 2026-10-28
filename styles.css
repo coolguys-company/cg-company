@@ -5,6 +5,7 @@
 /* Hallmark · hero-review: fix · 5 findings · 3 resolved 1 partial (the mouth stays desktop-only) 1 answered (headline chosen by the user) */
 /* Hallmark · finish-review: subagent · 6 findings + 2 copy · 7 resolved 1 partial (the light contact band kept: the user approved it in the brief; fields now on the band paper) · gap: none */
 /* Hallmark · waive 23 · the page has no hue at all; the measured accent is the ink of the CG logo, the hero picture itself · in a monochrome brand the mark is the only image, and painting it grey would hide the logo */
+/* Hallmark · dismissed 49 · each scene tab holds a full and a short label, only one shown per width, and .scenes__tabs [role="tab"] already sets white-space: nowrap */
 @import url("./tokens.css");
 @import url("./base.css");
 
@@ -158,9 +159,6 @@ html:not(.js) .board, .flow.is-static .board { grid-column: 1 / -1; }
 .dots__verdict { font-size: var(--text-lead); color: var(--color-ink); }
 .fly { position: absolute; left: 0; top: 0; z-index: var(--z-dropdown); padding: 0 var(--space-2xs); border-radius: 2px; background: var(--color-ink); color: var(--color-paper); font-family: var(--font-outlier); font-size: var(--text-sm); white-space: nowrap; pointer-events: none; }
 
-.demo__foot { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-md); }
-.demo__note { font-size: var(--text-sm); color: var(--color-muted); }
-html:not(.js) .demo__toggle, .demo.is-static .demo__toggle { display: none; }
 
 /* scene tabs; the thin bar under the active one counts down to the next scene */
 .scenes { grid-column: 1 / -1; display: grid; gap: var(--space-xl); }
@@ -172,6 +170,7 @@ html:not(.js) .scenes__tabs { display: none; }
 .scenes__tabs [role="tab"]:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 .scenes__tabs [role="tab"][aria-selected="true"] { background: var(--color-paper-3); color: var(--color-ink); }
 .scenes__tabs [role="tab"]:disabled { opacity: 0.55; cursor: not-allowed; }
+.tab__short { display: none; }
 .tab__bar { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--color-ink); transform: scaleX(0); transform-origin: left; }
 
 /* what CG takes off your hands: a ledger on a raised graphite well */
@@ -218,21 +217,46 @@ html:not(.js) .scenes__tabs { display: none; }
   .mark--hero { grid-column: 1; grid-row: 1; }
   .hero__text { grid-column: 1; grid-row: 2; margin-left: 0; }
   .demo .section-head, .contact .section-head, .brief { grid-column: 1 / -1; }
-  /* narrow screens: the incoming layer lies over the result and sorts into it in place */
-  .flow { min-height: 0; row-gap: var(--space-xl); align-items: start; }
-  .flow--tree { --chip-w: 12rem; }
+  /* narrow screens: each scene fits about one phone screen; the incoming layer lies over the
+     result and sorts into it in place, and every scene keeps one height so switching never jumps */
+  .demo__grid { row-gap: var(--space-xl); }
+  .scenes { gap: var(--space-md); }
+  .scenes__tabs { flex-wrap: nowrap; }
+  .tab__full { display: none; }
+  .tab__short { display: inline; }
+  .flow { min-height: 33rem; row-gap: var(--space-md); align-items: start; align-content: start; }
+  .flow--tree { --chip-w: 11rem; --chip-h: 3.5rem; }
   .chaos, .post, .stream, .board, .scan, .dots { grid-column: 1 / -1; }
   .chaos, .post { grid-row: 1; }
   .chaos { z-index: 2; height: auto; align-self: stretch; }
-  .post { z-index: 1; }
+  .chip__body { padding: var(--space-xs) var(--space-sm); }
+  .post { z-index: 1; gap: var(--space-sm); padding: var(--space-md); }
+  .post__head { padding-bottom: var(--space-sm); }
+  .post__avatar { width: 32px; height: 32px; }
+  .post__sent { padding-top: var(--space-sm); font-size: var(--text-xs); }
+  .tree { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-sm) var(--space-md); }
+  .tree__branch > ul { padding-left: var(--space-md); }
+  .tree__leaf { font-size: var(--text-xs); }
+  .tree__leaf::before { left: calc(-1 * var(--space-sm)); width: var(--space-xs); }
   .stream { grid-row: 1; z-index: 2; border: 0; padding: 0; align-self: start; }
   .stream .zone-label, .stream__count { display: none; }
-  .board { grid-row: 1; grid-template-columns: minmax(0, 1fr); }
-  .board ul { min-height: 0; }
-  /* room under the board for the columns that slide down while "new" holds six */
-  .flow--board { padding-bottom: calc(4 * (4.25rem + var(--space-xs))); }
-  .scan { grid-row: 1; }
-  .dots { grid-row: 2; }
+  .board { grid-row: 1; gap: var(--space-xs); }
+  .board__col { gap: var(--space-xs); padding: var(--space-xs); }
+  .board__head { font-size: var(--text-xs); }
+  .board ul { min-height: calc(2 * 4.25rem + var(--space-xs)); }
+  .card { height: 4.25rem; padding: var(--space-xs); font-size: var(--text-xs); line-height: 1.3; gap: 0; }
+  .card__src { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .card__txt { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; padding-right: 0; }
+  .card .check { width: 12px; height: 12px; right: var(--space-2xs); top: var(--space-2xs); }
+  .scan, .dots { grid-row: auto; }
+  .scan { gap: var(--space-xs); padding: var(--space-sm); }
+  .scan__rows { gap: var(--space-3xs); }
+  .scan__row { gap: 0; padding: var(--space-2xs) var(--space-xs); }
+  .scan__shop, .scan__raw { font-size: var(--text-xs); }
+  .dots { gap: var(--space-sm); }
+  .dots__plot { gap: 0; padding-top: var(--space-lg); }
+  .dots__track { height: 1.75rem; }
+  .dots__verdict { font-size: var(--text-md); }
   .work__row dt, .work__row dd { grid-column: 1 / -1; }
 }
 @media (max-width: 40rem) {
